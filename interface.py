@@ -13,11 +13,19 @@ from reportlab.lib.units import inch
 class Interface:
     def __init__(self):
         self.janela = Tk()
-        self.janela.title("Condomínio")
+        self.janela.title("Splash Residence Club")
         self.janela.geometry("800x600")
 
+
+        
+        # ícone da janela
         try:
-            logo_img = Image.open(r"C:\Condominio_poo\image\logo.png")
+            self.janela.iconbitmap(r".\image\logo.ico")
+        except Exception as e:
+            print(f"Erro ao carregar ícone: {e}")
+
+        try:
+            logo_img = Image.open(r".\image\logo.png")
             logo_img = logo_img.resize((80, 80), Image.Resampling.LANCZOS)
             self.logo = ImageTk.PhotoImage(logo_img)
         except Exception as e:
@@ -28,20 +36,21 @@ class Interface:
         header_frame.pack(fill=X, side=TOP, pady=10)
 
         if self.logo:
-            label_logo = Label(header_frame, image=self.logo, bg="white")
+            label_logo = Label(header_frame, image=self.logo)
             label_logo.pack(side=LEFT, padx=10)
 
         label_titulo = Label(
             header_frame,
             text="Sistema de Condomínio",
             font=("Arial", 20, "bold"),
-            bg="white"
+           
         )
         label_titulo.pack(side=LEFT, padx=10)
 
         self.criar_gui()
 
         self.janela.mainloop()
+
 
     def criar_gui(self):
         notebook = ttk.Notebook(self.janela)
@@ -107,37 +116,37 @@ class Interface:
         moradores_tab = ttk.Frame(notebook)
         notebook.add(moradores_tab, text='Moradores')
 
-        Label(moradores_tab, text="Nome", bg="white").grid(column=0, row=1, padx=10, pady=5, sticky=E)
+        Label(moradores_tab, text="Nome", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=1, padx=10, pady=5, sticky=E)
         self.entrada_nome_morador = Entry(moradores_tab)
         self.entrada_nome_morador.grid(column=1, row=1, padx=10, pady=5)
 
-        Label(moradores_tab, text="Bloco", bg="white").grid(column=0, row=2, padx=10, pady=5, sticky=E)
+        Label(moradores_tab, text="Bloco", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=2, padx=10, pady=5, sticky=E)
         self.entrada_bloco_morador = Entry(moradores_tab)
         self.entrada_bloco_morador.grid(column=1, row=2, padx=10, pady=5)
 
-        Label(moradores_tab, text="Apartamento:", bg="white").grid(column=0, row=3, padx=10, pady=5, sticky=E)
+        Label(moradores_tab, text="Apartamento:", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=3, padx=10, pady=5, sticky=E)
         self.entrada_apartamento_morador = Entry(moradores_tab)
         self.entrada_apartamento_morador.grid(column=1, row=3, padx=10, pady=5)
 
-        Label(moradores_tab, text="Telefone:", bg="white").grid(column=0, row=4, padx=10, pady=5, sticky=E)
+        Label(moradores_tab, text="Telefone:", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=4, padx=10, pady=5, sticky=E)
         self.entrada_telefone_morador = Entry(moradores_tab)
         self.entrada_telefone_morador.grid(column=1, row=4, padx=10, pady=5)
 
-        Label(moradores_tab, text="Veículo:", bg="white").grid(column=0, row=5, padx=10, pady=5, sticky=E)
+        Label(moradores_tab, text="Veículo:", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=5, padx=10, pady=5, sticky=E)
         self.entrada_veiculo_morador = Entry(moradores_tab)
         self.entrada_veiculo_morador.grid(column=1, row=5, padx=10, pady=5)
 
-        Label(moradores_tab, text="Placa:", bg="white").grid(column=0, row=6, padx=10, pady=5, sticky=E)
+        Label(moradores_tab, text="Placa:", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=6, padx=10, pady=5, sticky=E)
         self.entrada_placa_morador = Entry(moradores_tab)
         self.entrada_placa_morador.grid(column=1, row=6, padx=10, pady=5)
 
-        botao_cadastrar = Button(moradores_tab, text='Cadastrar Morador', command=self.cadastrar_morador)
+        botao_cadastrar = Button(moradores_tab, text='Cadastrar Morador', font=("Arial", 10, "normal"), command=self.cadastrar_morador)
         botao_cadastrar.grid(column=0, row=7, columnspan=2, padx=10, pady=10)
 
-        self.texto_cadastro_moradores = Label(moradores_tab, text='', bg="white")
+        self.texto_cadastro_moradores = Label(moradores_tab, text='', bg="white", font=("Arial", 12, "normal"))
         self.texto_cadastro_moradores.grid(column=0, row=8, columnspan=2, padx=10, pady=10)
 
-        botao_imprimir_relatorio = Button(moradores_tab, text='Imprimir Relatório', command=self.imprimir_relatorio_moradores)
+        botao_imprimir_relatorio = Button(moradores_tab, text='Imprimir Relatório', font=("Arial", 10, "normal"), command=self.imprimir_relatorio_moradores)
         botao_imprimir_relatorio.grid(column=0, row=12, columnspan=2, padx=10, pady=10)
 
         self.texto_listar_moradores = Label(moradores_tab, text='', justify=RIGHT, bg="white")
@@ -165,45 +174,45 @@ class Interface:
         colaboradores_tab = ttk.Frame(notebook)
         notebook.add(colaboradores_tab, text='Colaboradores')
 
-        Label(colaboradores_tab, text="Nome", bg="white").grid(column=0, row=1, padx=10, pady=5, sticky=E)
+        Label(colaboradores_tab, text="Nome", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=1, padx=10, pady=5, sticky=E)
         self.entrada_nome_colaborador = Entry(colaboradores_tab)
         self.entrada_nome_colaborador.grid(column=1, row=1, padx=10, pady=5)
 
-        Label(colaboradores_tab, text="Registro", bg="white").grid(column=0, row=2, padx=10, pady=5, sticky=E)
+        Label(colaboradores_tab, text="Registro", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=2, padx=10, pady=5, sticky=E)
         self.entrada_registro_colaborador = Entry(colaboradores_tab)
         self.entrada_registro_colaborador.grid(column=1, row=2, padx=10, pady=5)
 
-        Label(colaboradores_tab, text="Cargo", bg="white").grid(column=0, row=3, padx=10, pady=5, sticky=E)
+        Label(colaboradores_tab, text="Cargo", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=3, padx=10, pady=5, sticky=E)
         self.entrada_cargo_colaborador = Entry(colaboradores_tab)
         self.entrada_cargo_colaborador.grid(column=1, row=3, padx=10, pady=5)
 
-        Label(colaboradores_tab, text="CPF", bg="white").grid(column=0, row=4, padx=10, pady=5, sticky=E)
+        Label(colaboradores_tab, text="CPF", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=4, padx=10, pady=5, sticky=E)
         self.entrada_cpf_colaborador = Entry(colaboradores_tab)
         self.entrada_cpf_colaborador.grid(column=1, row=4, padx=10, pady=5)
 
-        Label(colaboradores_tab, text="Admissao", bg="white").grid(column=0, row=5, padx=10, pady=5, sticky=E)
+        Label(colaboradores_tab, text="Admissao", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=5, padx=10, pady=5, sticky=E)
         self.entrada_admissao_colaborador = Entry(colaboradores_tab)
         self.entrada_admissao_colaborador.grid(column=1, row=5, padx=10, pady=5)
 
-        Label(colaboradores_tab, text="Demissao", bg="white").grid(column=0, row=6, padx=10, pady=5, sticky=E)
+        Label(colaboradores_tab, text="Demissao", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=6, padx=10, pady=5, sticky=E)
         self.entrada_demissao_colaborador = Entry(colaboradores_tab)
         self.entrada_demissao_colaborador.grid(column=1, row=6, padx=10, pady=5)
 
-        Label(colaboradores_tab, text="Telefone", bg="white").grid(column=0, row=7, padx=10, pady=5, sticky=E)
+        Label(colaboradores_tab, text="Telefone", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=7, padx=10, pady=5, sticky=E)
         self.entrada_telefone_colaborador = Entry(colaboradores_tab)
         self.entrada_telefone_colaborador.grid(column=1, row=7, padx=10, pady=5)
 
-        Label(colaboradores_tab, text="Email", bg="white").grid(column=0, row=8, padx=10, pady=5, sticky=E)
+        Label(colaboradores_tab, text="Email", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=8, padx=10, pady=5, sticky=E)
         self.entrada_email_colaborador = Entry(colaboradores_tab)
         self.entrada_email_colaborador.grid(column=1, row=8, padx=10, pady=5)
 
-        botao_cadastrar = Button(colaboradores_tab, text='Cadastrar Colaborador', command=self.cadastrar_colaborador)
+        botao_cadastrar = Button(colaboradores_tab, text='Cadastrar Colaborador', font=("Arial", 10, "normal"), command=self.cadastrar_colaborador)
         botao_cadastrar.grid(column=0, row=9, columnspan=2, padx=10, pady=10)
 
-        self.texto_cad_colaborador = Label(colaboradores_tab, text='', bg="white")
+        self.texto_cad_colaborador = Label(colaboradores_tab, text='', bg="white", font=("Arial", 12, "normal"))
         self.texto_cad_colaborador.grid(column=0, row=10, columnspan=2, padx=10, pady=10)
 
-        botao_imprimir_relatorio = Button(colaboradores_tab, text='Imprimir Relatório', command=self.imprimir_relatorio_colaboradores)
+        botao_imprimir_relatorio = Button(colaboradores_tab, text='Imprimir Relatório', font=("Arial", 10, "normal"), command=self.imprimir_relatorio_colaboradores)
         botao_imprimir_relatorio.grid(column=0, row=11, columnspan=2, padx=10, pady=10)
 
     def cadastrar_colaborador(self):
@@ -242,53 +251,53 @@ class Interface:
         visitantes_tab = ttk.Frame(notebook)
         notebook.add(visitantes_tab, text='Visitantes')
 
-        Label(visitantes_tab, text="Nome", bg="white").grid(column=0, row=1, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Nome", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=1, padx=10, pady=5, sticky=E)
         self.entrada_nome_visitante = Entry(visitantes_tab)
         self.entrada_nome_visitante.grid(column=1, row=1, padx=10, pady=5)
 
-        Label(visitantes_tab, text="Documento", bg="white").grid(column=0, row=2, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Documento", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=2, padx=10, pady=5, sticky=E)
         self.entrada_documento_visitante = Entry(visitantes_tab)
         self.entrada_documento_visitante.grid(column=1, row=2, padx=10, pady=5)
 
-        Label(visitantes_tab, text="Telefone", bg="white").grid(column=0, row=3, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Telefone", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=3, padx=10, pady=5, sticky=E)
         self.entrada_telefone_visitante = Entry(visitantes_tab)
         self.entrada_telefone_visitante.grid(column=1, row=3, padx=10, pady=5)
 
-        Label(visitantes_tab, text="Morador", bg="white").grid(column=0, row=4, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Morador", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=4, padx=10, pady=5, sticky=E)
         self.entrada_morador_visitado_visitante = Entry(visitantes_tab)
         self.entrada_morador_visitado_visitante.grid(column=1, row=4, padx=10, pady=5)
 
-        Label(visitantes_tab, text="Bloco", bg="white").grid(column=0, row=5, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Bloco", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=5, padx=10, pady=5, sticky=E)
         self.entrada_bloco_visitante = Entry(visitantes_tab)
         self.entrada_bloco_visitante.grid(column=1, row=5, padx=10, pady=5)
 
-        Label(visitantes_tab, text="Apartamento", bg="white").grid(column=0, row=6, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Apartamento", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=6, padx=10, pady=5, sticky=E)
         self.entrada_apartamento_visitante = Entry(visitantes_tab)
         self.entrada_apartamento_visitante.grid(column=1, row=6, padx=10, pady=5)
 
-        Label(visitantes_tab, text="Veiculo", bg="white").grid(column=0, row=7, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Veiculo", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=7, padx=10, pady=5, sticky=E)
         self.entrada_veiculo_visitante = Entry(visitantes_tab)
         self.entrada_veiculo_visitante.grid(column=1, row=7, padx=10, pady=5)
 
-        Label(visitantes_tab, text="Placa", bg="white").grid(column=0, row=8, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Placa", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=8, padx=10, pady=5, sticky=E)
         self.entrada_placa_visitante = Entry(visitantes_tab)
         self.entrada_placa_visitante.grid(column=1, row=8, padx=10, pady=5)
 
-        Label(visitantes_tab, text="Entrada", bg="white").grid(column=0, row=9, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Entrada", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=9, padx=10, pady=5, sticky=E)
         self.entrada_entrada_visitante = Entry(visitantes_tab)
         self.entrada_entrada_visitante.grid(column=1, row=9, padx=10, pady=5)
 
-        Label(visitantes_tab, text="Saida", bg="white").grid(column=0, row=10, padx=10, pady=5, sticky=E)
+        Label(visitantes_tab, text="Saida", bg="white", font=("Arial", 12, "normal")).grid(column=0, row=10, padx=10, pady=5, sticky=E)
         self.entrada_saida_visitante = Entry(visitantes_tab)
         self.entrada_saida_visitante.grid(column=1, row=10, padx=10, pady=5)
 
-        botao_cadastrar = Button(visitantes_tab, text='Cadastrar Visitante', command=self.cadastrar_visitante)
+        botao_cadastrar = Button(visitantes_tab, text='Cadastrar Visitante', font=("Arial", 10, "normal"), command=self.cadastrar_visitante)
         botao_cadastrar.grid(column=0, row=12, columnspan=2, padx=10, pady=10)
 
         self.texto_cad_visitantes = Label(visitantes_tab, text='', bg="white")
         self.texto_cad_visitantes.grid(column=0, row=13, columnspan=2, padx=10, pady=10)
 
-        botao_imprimir_relatorio = Button(visitantes_tab, text='Imprimir Relatório', command=self.imprimir_relatorio_visitantes)
+        botao_imprimir_relatorio = Button(visitantes_tab, text='Imprimir Relatório', font=("Arial", 10, "normal"), command=self.imprimir_relatorio_visitantes)
         botao_imprimir_relatorio.grid(column=0, row=14, columnspan=2, padx=10, pady=10)
 
     def cadastrar_visitante(self):
